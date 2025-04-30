@@ -1,0 +1,46 @@
+<hr>
+<h3>Search Available Car Models</h3>
+<form method="POST" action="/client/search_models">
+    <label>Rental Date:</label>
+    <input type="date" name="date" required>
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <h4>Available Car Models on {{ query_date }}:</h4>
+    <ul>
+        {% for model in results %}
+            <li>{{ model }}</li>
+        {% endfor %}
+    </ul>
+{% elif no_result %}
+    <p style="color:red;">No available models on this date.</p>
+{% endif %}
+
+
+<hr>
+<h3>Rent a Car</h3>
+<form method="POST" action="/client/rent">
+    <label>Rental Date:</label>
+
+    <input type="date" name="rental_date" required><br>
+
+    <label>Car Model:</label>
+    <input type="text" name="model_name" required><br>
+
+    <label>Start Location:</label>
+    <input type="text" name="location" required><br>
+
+    <button type="submit">Rent Now</button>
+
+    <a href="/client/rental_history">View My Rental History</a>
+
+    <a href="/client/review">Write a Review</a>
+</form>
+
+{% if rent_result %}
+    <p style="color:green;">Rented Successfully! Driver: {{ rent_result.driver }} | Car ID: {{ rent_result.car }}</p>
+{% elif rent_fail %}
+    <p style="color:red;">Sorry, no available car + driver for that model.</p>
+{% endif %}
+

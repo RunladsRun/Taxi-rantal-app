@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rental History</title>
+</head>
+<body>
+    <h1>Welcome, {{ identifier }}</h1>
+    <h2>Your Rental History:</h2>
+    <ul>
+        {% for item in history %}
+            <li>
+                Car: {{ item.car }} |
+                Driver: {{ item.driver }} |
+                From: {{ item.location }} |
+                Date: {{ item.time }} |
+                Rating: {{ item.rating }}
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/client">← Back to Client Home</a>
+</body>
+</html>

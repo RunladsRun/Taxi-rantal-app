@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review a Driver</title>
+</head>
+<body>
+    <h1>Write a Review</h1>
+
+    {% if success %}
+        <p style="color: green;">Review submitted successfully!</p>
+    {% elif error %}
+        <p style="color: red;">You haven’t rented a trip with that driver yet.</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Driver Name:</label>
+        <input type="text" name="driver" required><br><br>
+
+        <label>Rating (1-5):</label>
+        <input type="number" name="rating" min="1" max="5" required><br><br>
+
+        <input type="submit" value="Submit Review">
+    </form>
+
+    <br>
+    <a href="/client">← Back to Client Home</a>
+
+    <a href="/client/review">Write a Review</a>
+
+</body>
+</html>

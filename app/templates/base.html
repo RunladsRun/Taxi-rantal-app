@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taxi Rental</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
+
+
+# ==== app/templates/login.html ====
+{% extends 'base.html' %}
+{% block content %}
+<h2>Login</h2>
+<form method="post" action="{{ url_for('login') }}">
+    <label>Role:</label>
+    <select name="role">
+        <option value="manager">Manager</option>
+        <option value="client">Client</option>
+        <option value="driver">Driver</option>
+    </select>
+    <br>
+    <label>Identifier (SSN / Email / Name):</label>
+    <input type="text" name="identifier" required>
+    <br>
+    <button type="submit">Login</button>
+</form>
+{% endblock %}

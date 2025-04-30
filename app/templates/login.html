@@ -1,0 +1,27 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="POST" action="/login">
+        <label>Role:</label>
+        <select name="role">
+            <option value="manager">Manager</option>
+            <option value="client">Client</option>
+            <option value="driver">Driver</option>
+        </select><br>
+
+        <label>Identifier:</label>
+        <input type="text" name="identifier" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+        <hr>
+    <a href="/client/register">Register as a New Client</a>
+
+</body>
+</html>
