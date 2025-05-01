@@ -4,7 +4,7 @@
     <title>Driver Home</title>
 </head>
 <body>
-    <h1>Welcome, {{ name }}!</h1>
+    <h1>Welcome, Driver {{ name }}!</h1>
 
     <!-- 统计信息 -->
     <h3>Your Stats</h3>
@@ -14,8 +14,12 @@
     <hr>
     <h3>Update Your Address</h3>
     <form method="POST" action="/driver/update_address">
-        <label>New Address:</label>
-        <input type="text" name="new_address" required>
+        <label>Road:</label>
+        <input type="text" name="road" required>
+        <label>Number:</label>
+        <input type="text" name="number" required>
+        <label>City:</label>
+        <input type="text" name="city" required>
         <button type="submit">Update</button>
     </form>
 
@@ -24,21 +28,30 @@
     {% endif %}
 
     <hr>
+
+        <!-- 新增：查看所有车型按钮 -->
+    <form method="GET" action="/driver/view_models">
+        <button type="submit">View All Car Models</button>
+    </form>
+    
     <h3>Declare Car Model You Can Drive</h3>
     <form method="POST" action="/driver/declare_model">
-        <label>Select model:</label>
-        <select name="model_name" required>
+        <label>Select model ID:</label>
+        <select name="modelid" required>
             {% for model in model_list %}
                 <option value="{{ model }}">{{ model }}</option>
             {% endfor %}
-        </select>
+        </select><br>
+        <label>Enter car ID:</label>
+        <input type="number" name="carid" required><br>
         <button type="submit">Declare</button>
     </form>
 
     {% if declared %}
-        <p style="color:green;">You have declared you can drive {{ declared }}.</p>
+        <p style="color:green;">You have declared you can drive model {{ declared }}.</p>
     {% endif %}
 
 </body>
 </html>
+
 

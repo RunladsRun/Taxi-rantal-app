@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rental History</title>
+    <title>My Rental History</title>
 </head>
 <body>
-    <h1>Welcome, {{ identifier }}</h1>
-    <h2>Your Rental History:</h2>
-    <ul>
-        {% for item in history %}
-            <li>
-                Car: {{ item.car }} |
-                Driver: {{ item.driver }} |
-                From: {{ item.location }} |
-                Date: {{ item.time }} |
-                Rating: {{ item.rating }}
-            </li>
+    <h2>My Rental History</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Model ID</th>
+            <th>Car ID</th>
+            <th>Driver</th>
+        </tr>
+        {% for r in history %}
+        <tr>
+            <td>{{ r.date }}</td>
+            <td>{{ r.modelid }}</td>
+            <td>{{ r.carid }}</td>
+            <td>{{ r.driver }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
     <br>
-    <a href="/client">← Back to Client Home</a>
+    <a href="/client">Back to Home</a>
 </body>
 </html>

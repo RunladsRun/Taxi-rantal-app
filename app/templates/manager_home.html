@@ -1,90 +1,173 @@
-<!-- app/templates/manager_home.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manager Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .section-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .card input, .card select {
+            padding: 6px;
+            margin-top: 4px;
+        }
+
+        .card button {
+            margin-top: 12px;
+            padding: 8px;
+        }
+
+        hr {
+            margin: 40px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome, Manager!</h1>
-    <p>Your SSN: {{ identifier }}</p>
-
+    <h1>Welcome, {{ name }}!</h1>
     <h2>Manager Actions</h2>
 
+    <!-- Driver Management -->
+    <div class="section-row">
+        <div class="card">
+            <h3>Add Driver</h3>
+            <form method="POST" action="/manager/add_driver">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+                <label>Address (road, number, city):</label>
+                <input type="text" name="road" placeholder="Road" required>
+                <input type="text" name="number" placeholder="Number" required>
+                <input type="text" name="city" placeholder="City" required>
+                <button type="submit">Add Driver</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Delete Driver</h3>
+            <form method="POST" action="/manager/delete_driver">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+                <button type="submit">Delete Driver</button>
+            </form>
+        </div>
+    </div>
 
+    <!-- Car Management -->
+    <div class="section-row">
+        <div class="card">
+            <h3>Add Car</h3>
+            <form method="POST" action="/manager/add_car">
+                <label>Car ID:</label>
+                <input type="number" name="carid" required>
+                <label>Brand:</label>
+                <input type="text" name="brand" required>
+                <button type="submit">Add Car</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Delete Car</h3>
+            <form method="POST" action="/manager/delete_car">
+                <label>Car ID:</label>
+                <input type="number" name="carid" required>
+                <button type="submit">Delete Car</button>
+            </form>
+        </div>
+    </div>
 
-    <h3>Add a Driver</h3>
-    <form method="POST" action="/manager/add_driver">
-        <label>Driver Name:</label>
-        <input type="text" name="name" required><br>
-        <label>Driver Address:</label>
-        <input type="text" name="address" required><br>
-        <button type="submit">Add Driver</button>
-    </form>
-
-        <hr>
-    <h3>Add a Car Model</h3>
-    <form method="POST" action="/manager/add_model">
-        <label>Model Name:</label>
-        <input type="text" name="model_name" required><br>
-        <label>Passenger Capacity:</label>
-        <input type="number" name="num_passengers" required><br>
-        <label>Car Type:</label>
-        <input type="text" name="car_type" required><br>
-        <button type="submit">Add Model</button>
-    </form>
-
-    <hr>
-    <h3>Add a Car</h3>
-    <form method="POST" action="/manager/add_car">
-        <label>Car ID:</label>
-        <input type="text" name="car_id" required><br>
-        <label>Model Name:</label>
-        <input type="text" name="model_name" required><br>
-        <label>Location:</label>
-        <input type="text" name="location" required><br>
-        <button type="submit">Add Car</button>
-    </form>
-
+    <!-- Model Management -->
+    <div class="section-row">
+        <div class="card">
+            <h3>Add Car Model</h3>
+            <form method="POST" action="/manager/add_model">
+                <label>Model ID:</label>
+                <input type="number" name="modelid" required>
+                <label>Car ID:</label>
+                <input type="number" name="carid" required>
+                <label>Color:</label>
+                <input type="text" name="color" required>
+                <label>Year:</label>
+                <input type="number" name="year" required>
+                <label>Transmission:</label>
+                <select name="transmission" required>
+                    <option value="manual">Manual</option>
+                    <option value="automatic">Automatic</option>
+                </select>
+                <button type="submit">Add Model</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Delete Car Model</h3>
+            <form method="POST" action="/manager/delete_model">
+                <label>Model ID:</label>
+                <input type="number" name="modelid" required>
+                <label>Car ID:</label>
+                <input type="number" name="carid" required>
+                <button type="submit">Delete Model</button>
+            </form>
+        </div>
+    </div>
 
     <hr>
     <h3>Top-K Clients by Rental Count</h3>
     <form method="POST" action="/manager/top_k_clients">
         <label>Enter K:</label>
-        <input type="number" name="k" required min="1"><br>
+        <input type="number" name="k" required min="1">
         <button type="submit">Show Top K</button>
     </form>
-
     {% if top_clients %}
-        <h4>Top Clients:</h4>
         <ul>
-            {% for client in top_clients %}
-                <li>{{ client.email }} — {{ client.count }} rentals</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-
-        <hr>
-    <h3>Car Model Rental Count</h3>
-    <form method="GET" action="/manager/model_rental_count">
-        <button type="submit">Show Rental Counts</button>
-    </form>
-
-    {% if model_counts %}
-        <ul>
-        {% for item in model_counts %}
-            <li>{{ item.model }} — {{ item.count }} rentals</li>
+        {% for client in top_clients %}
+            <li>{{ client.name }} ({{ client.email }}) — {{ client.count }} rentals</li>
         {% endfor %}
         </ul>
     {% endif %}
 
 
-        <hr>
+    <hr>
+    <h3>Car Model Rental Count</h3>
+    <form method="GET" action="/manager/model_rental_count">
+        <button type="submit">Show Rental Counts</button>
+    </form>
+    {% if model_counts %}
+        <ul>
+            {% for item in model_counts %}
+                <li>Model {{ item.model }} — {{ item.count }} rentals</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <hr>
     <h3>Driver Rental Count and Avg Rating</h3>
     <form method="GET" action="/manager/driver_stats">
         <button type="submit">Show Driver Stats</button>
     </form>
-
     {% if driver_stats %}
         <ul>
         {% for d in driver_stats %}
@@ -94,21 +177,24 @@
     {% endif %}
 
 
-        <hr>
-    <h3>Client-Driver Pairs by Start City</h3>
-    <form method="GET" action="/manager/client_driver_pairs">
-        <button type="submit">Show Client-Driver Pairs</button>
+    <hr>
+    <h3>Find Clients from City1 Renting from Drivers in City2</h3>
+    <form method="POST" action="/manager/city_to_city_clients">
+        <label>Client City (C1):</label>
+        <input type="text" name="city1" required>
+        <label>Driver City (C2):</label>
+        <input type="text" name="city2" required>
+        <button type="submit">Search</button>
     </form>
 
-    {% if city_pairs %}
+    {% if matched_clients %}
+        <h4>Clients from {{ city1 }} who rented from drivers in {{ city2 }}:</h4>
         <ul>
-        {% for pair in city_pairs %}
-            <li>{{ pair.city }} — {{ pair.client }} ↔ {{ pair.driver }}</li>
-        {% endfor %}
+            {% for c in matched_clients %}
+                <li>{{ c.name }} — {{ c.email }}</li>
+            {% endfor %}
         </ul>
     {% endif %}
-
-
 
 </body>
 </html>

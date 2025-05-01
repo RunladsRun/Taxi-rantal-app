@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Available Car Models</title></head>
+<body>
+    <h2>All Car Models</h2>
+    <table border="1">
+        <tr>
+            <th>Model ID</th>
+            <th>Car ID</th>
+            <th>Color</th>
+            <th>Year</th>
+            <th>Transmission</th>
+        </tr>
+        {% for m in models %}
+        <tr>
+            <td>{{ m.modelid }}</td>
+            <td>{{ m.carid }}</td>
+            <td>{{ m.color }}</td>
+            <td>{{ m.year }}</td>
+            <td>{{ m.transmission }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/driver">Back to Home</a>
+</body>
+</html>
