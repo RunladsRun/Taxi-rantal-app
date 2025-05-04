@@ -382,16 +382,21 @@ def declare_model():
     carid = int(request.form['carid'])
     name = session.get('identifier')
 
-    db.session.execute(
-        text("INSERT INTO canDrive (driver_name, modelid, carid) VALUES (:name, :modelid, :carid) ON CONFLICT DO NOTHING"),
-        {"name": name, "modelid": modelid, "carid": carid}
-    )
-    db.session.commit()
-
     result = db.session.execute(text("SELECT modelid FROM model"))
     model_list = [row.modelid for row in result]
 
-    return render_template('driver_home.html', name=name, model_list=model_list, declared=modelid)
+    try:
+        db.session.execute(
+            text("INSERT INTO canDrive (driver_name, modelid, carid) VALUES (:name, :modelid, :carid) ON CONFLICT DO NOTHING"),
+            {"name": name, "modelid": modelid, "carid": carid}
+        )
+        db.session.commit()
+        return render_template('driver_home.html', name=name, model_list=model_list, declared=1)
+    except:
+        return render_template('driver_home.html', name=name, model_list=model_list, declared=2)
+        
+    
+
 
 
 @app.route('/driver/view_models')

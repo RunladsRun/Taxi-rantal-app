@@ -2,37 +2,122 @@
 <html>
 <head>
     <title>Driver Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .section-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .card input, .card select {
+            padding: 6px;
+            margin-top: 4px;
+        }
+
+        .card button {
+            margin-top: 12px;
+            padding: 8px;
+        }
+
+        hr {
+            margin: 40px 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome, Driver {{ name }}!</h1>
 
+<<<<<<< Updated upstream
     
+=======
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 2bdeadd0cf2bdc0e484543b8ead372c7f2d18525
+>>>>>>> Stashed changes
     <h3>Your Stats</h3>
     <p>Total Trips: {{ trip_count }}</p>
     <p>Average Rating: {{ avg_rating }}</p>
 
     <hr>
-    <h3>Update Your Address</h3>
-    <form method="POST" action="/driver/update_address">
-        <label>Road:</label>
-        <input type="text" name="road" required>
-        <label>Number:</label>
-        <input type="text" name="number" required>
-        <label>City:</label>
-        <input type="text" name="city" required>
-        <button type="submit">Update</button>
-    </form>
-
-    {% if success %}
-        <p style="color:green;">Address updated successfully!</p>
-    {% endif %}
+    <div class="section-row">
+        <div class="card">
+            <h3>Update Your Address</h3>
+            <form method="POST" action="/driver/update_address">
+                <label>Road:</label>
+                <input type="text" name="road" required>
+                <label>Number:</label>
+                <input type="text" name="number" required>
+                <label>City:</label>
+                <input type="text" name="city" required>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Declare Car Model You Can Drive</h3>
+            <form method="POST" action="/driver/declare_model">
+                <label>Select model ID:</label>
+                <select name="modelid" required>
+                {% for model in model_list %}
+                <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
+                </select><br>
+                <label>Enter car ID:</label>
+                <input type="number" name="carid" required><br>
+                <button type="submit">Declare</button>
+                {% if declared == 1 %}
+                    <p style="color:green;">You have declared you can drive model {{ declared }}.</p>
+                {% elif declared == 2 %}
+                    <p style="color:red;">No such model exists</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
 
     <hr>
 
+<<<<<<< Updated upstream
     
     <form method="GET" action="/driver/view_models">
         <button type="submit">View All Car Models</button>
     </form>
+=======
+<<<<<<< HEAD
+    <form method="GET" action="/driver/view_models">
+        <button type="submit">View All Car Models</button>
+    </form>
+=======
+    
+    <form method="GET" action="/driver/view_models">
+        <button type="submit">View All Car Models</button>
+    </form>
+>>>>>>> Stashed changes
 
     <h3>Declare Car Model You Can Drive</h3>
     <form method="POST" action="/driver/declare_model">
@@ -46,10 +131,10 @@
         <input type="number" name="carid" required><br>
         <button type="submit">Declare</button>
     </form>
+>>>>>>> 2bdeadd0cf2bdc0e484543b8ead372c7f2d18525
 
-    {% if declared %}
-        <p style="color:green;">You have declared you can drive model {{ declared }}.</p>
-    {% endif %}
+    <br>
+    <a href="/">Back to login page</a>
 
 </body>
 </html>
