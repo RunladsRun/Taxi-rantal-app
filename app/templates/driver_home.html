@@ -52,15 +52,6 @@
 </head>
 <body>
     <h1>Welcome, Driver {{ name }}!</h1>
-
-<<<<<<< Updated upstream
-    
-=======
-<<<<<<< HEAD
-=======
-    
->>>>>>> 2bdeadd0cf2bdc0e484543b8ead372c7f2d18525
->>>>>>> Stashed changes
     <h3>Your Stats</h3>
     <p>Total Trips: {{ trip_count }}</p>
     <p>Average Rating: {{ avg_rating }}</p>
@@ -101,38 +92,6 @@
     </div>
 
     <hr>
-
-<<<<<<< Updated upstream
-    
-    <form method="GET" action="/driver/view_models">
-        <button type="submit">View All Car Models</button>
-    </form>
-=======
-<<<<<<< HEAD
-    <form method="GET" action="/driver/view_models">
-        <button type="submit">View All Car Models</button>
-    </form>
-=======
-    
-    <form method="GET" action="/driver/view_models">
-        <button type="submit">View All Car Models</button>
-    </form>
->>>>>>> Stashed changes
-
-    <h3>Declare Car Model You Can Drive</h3>
-    <form method="POST" action="/driver/declare_model">
-        <label>Select model ID:</label>
-        <select name="modelid" required>
-            {% for model in model_list %}
-                <option value="{{ model }}">{{ model }}</option>
-            {% endfor %}
-        </select><br>
-        <label>Enter car ID:</label>
-        <input type="number" name="carid" required><br>
-        <button type="submit">Declare</button>
-    </form>
->>>>>>> 2bdeadd0cf2bdc0e484543b8ead372c7f2d18525
-
     <br>
     <a href="/">Back to login page</a>
 

@@ -40,7 +40,6 @@
             margin-top: 4px;
         }
 
-<<<<<<< HEAD
         .card button {
             margin-top: 12px;
             padding: 8px;
@@ -114,52 +113,5 @@
 </html>
 =======
 <hr>
-<<<<<<< Updated upstream
-<h2>Welcome, {{ client_name }}!</h2>
-
-<h3>Search Available Car Models</h3>
-<form method="POST" action="/client/search_models">
-    <label>Rental Date:</label>
-    <input type="date" name="date" required>
-    <button type="submit">Search</button>
-</form>
-
-{% if results %}
-    <h4>Available Car Models on {{ query_date }}:</h4>
-    <ul>
-        {% for model in results %}
-            <li>{{ model }}</li>
-        {% endfor %}
-    </ul>
-{% elif no_result %}
-    <p style="color:red;">No available models or driver on this date.</p>
-{% endif %}
-
-<hr>
-<h3>Rent a Car</h3>
-<form method="POST" action="/client/rent">
-    <label>Rental Date:</label>
-    <input type="date" name="rental_date" required><br>
-
-    <label>Select Model ID:</label>
-    <select name="modelid" required>
-        {% for model in results %}
-            <option value="{{ model }}">{{ model }}</option>
-        {% endfor %}
-    </select><br>
-
-    <button type="submit">Rent Now</button>
-</form>
-
-{% if rent_result %}
-    <p style="color:green;">Rented Successfully! Driver: {{ rent_result.driver }} | Car ID: {{ rent_result.car }}</p>
-{% elif rent_fail %}
-    <p style="color:red;">Sorry, no available car or driver for that model.</p>
-{% endif %}
-
-<hr>
-=======
->>>>>>> Stashed changes
 <a href="/client/rental_history">View My Rental Histor</a> |
 <a href="/client/review">Write a Review</a>
->>>>>>> 2bdeadd0cf2bdc0e484543b8ead372c7f2d18525
