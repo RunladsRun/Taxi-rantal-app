@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>Login</h1>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
     <form method="POST" action="/login">
         <label>Role:</label>
         <select name="role">
@@ -23,6 +28,5 @@
     <hr>
     <a href="/client/register">Register as a New Client</a><br>
     <a href="/manager/register">Register as a New Manager</a>
-
 </body>
 </html>

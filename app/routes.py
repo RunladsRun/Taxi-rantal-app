@@ -9,12 +9,37 @@ from sqlalchemy import text
 def home():
     return render_template('login.html')
 
-# ---- Login ----
 @app.route('/login', methods=['POST'])
 def login():
     role = request.form['role']
     identifier = request.form['identifier']
 
+    
+    if role == 'manager':
+        result = db.session.execute(
+            text("SELECT * FROM manager WHERE ssn = :id"),
+            {"id": identifier}
+        ).fetchone()
+        if not result:
+            return render_template('login.html', error="Manager not found.")
+    elif role == 'client':
+        result = db.session.execute(
+            text("SELECT * FROM client WHERE email = :id"),
+            {"id": identifier}
+        ).fetchone()
+        if not result:
+            return render_template('login.html', error="Client not found.")
+    elif role == 'driver':
+        result = db.session.execute(
+            text("SELECT * FROM driver WHERE name = :id"),
+            {"id": identifier}
+        ).fetchone()
+        if not result:
+            return render_template('login.html', error="Driver not found.")
+    else:
+        return render_template('login.html', error="Invalid role.")
+
+    
     session['role'] = role
     session['identifier'] = identifier
 
@@ -24,8 +49,8 @@ def login():
         return redirect(url_for('client_home'))
     elif role == 'driver':
         return redirect(url_for('driver_home'))
-    else:
-        return "Invalid role"
+
+
 
 # ---- Manager_home_page: 4.1,2,3 ----------------------------------------
 @app.route('/manager')

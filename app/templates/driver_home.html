@@ -6,7 +6,7 @@
 <body>
     <h1>Welcome, Driver {{ name }}!</h1>
 
-    <!-- 统计信息 -->
+    
     <h3>Your Stats</h3>
     <p>Total Trips: {{ trip_count }}</p>
     <p>Average Rating: {{ avg_rating }}</p>
@@ -29,11 +29,11 @@
 
     <hr>
 
-        <!-- 新增：查看所有车型按钮 -->
+    
     <form method="GET" action="/driver/view_models">
         <button type="submit">View All Car Models</button>
     </form>
-    
+
     <h3>Declare Car Model You Can Drive</h3>
     <form method="POST" action="/driver/declare_model">
         <label>Select model ID:</label>
