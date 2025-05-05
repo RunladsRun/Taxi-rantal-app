@@ -119,6 +119,9 @@
                     <option value="automatic">Automatic</option>
                 </select>
                 <button type="submit">Add Model</button>
+                {% if error %}
+                    <p style="color:red;">{{ error }}.</p>
+                {% endif %}
             </form>
         </div>
         <div class="card">

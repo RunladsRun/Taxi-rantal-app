@@ -96,9 +96,9 @@ def add_model():
         {"cid": carid}
     ).fetchone()
     if not result:
-        return redirect(url_for('manager_home'))
+        return render_template('manager_home.html', error="Car ID not found.")
 
-    db.session.execute(
+    db.session.executeb(
         text("""
             INSERT INTO model (modelid, carid, color, year, transmission)
             VALUES (:mid, :cid, :col, :yr, :tran)
