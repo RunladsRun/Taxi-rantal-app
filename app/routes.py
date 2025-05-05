@@ -91,6 +91,13 @@ def add_model():
     year = int(request.form['year'])
     transmission = request.form['transmission']
 
+    result = db.session.execute(
+        text("Select * FROM car WHERE carid = :cid"),
+        {"cid": carid}
+    ).fetchone()
+    if not result:
+        return redirect(url_for('manager_home'))
+
     db.session.execute(
         text("""
             INSERT INTO model (modelid, carid, color, year, transmission)
